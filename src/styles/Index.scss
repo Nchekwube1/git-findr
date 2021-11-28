@@ -1,11 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .theme {
+    background-color: #d0e8e8;
+  }
+  .gitname {
+    font-family: comforter;
+  }
+  .modal {
+    background-color: rgba(#000, 0.2);
+  }
+  .del-250 {
+    animation-delay: 0.25s;
+  }
+  .del-400 {
+    animation-delay: 0.4s;
+  }
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: novaslim;
+}
+body {
+  min-height: 100vh;
   background-color: #d0e8e8;
 }
 
@@ -14,18 +35,6 @@
   src: url("./assets/novaslim.ttf");
 }
 @font-face {
-  font-family: opensans;
-  src: url("./assets/opensans.ttf");
-}
-@font-face {
-  font-family: texturina;
-  src: url("./assets/texturina.ttf");
-}
-@font-face {
   font-family: comforter;
   src: url("./assets/comforter.ttf");
-}
-
-.gitname {
-  font-family: comforter;
 }
