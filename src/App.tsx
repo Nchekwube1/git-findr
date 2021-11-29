@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loading from "./Loading";
+import git from "./styles/assets/git.png";
 import axios from "axios";
 import Modal from "./Modal";
 interface props {
@@ -30,11 +31,13 @@ function App() {
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const formatted = userName.replace(" ", "");
-    setUserName(formatted);
+    setUserName(userName.replace(/ /g, ""));
+    // const formatted = userName.replace(/ /g, "");
+    // console.log(userName, formatted);
     axios
       .get(gitUrl)
       .then((res) => {
+        setUserName("");
         const data = res.data;
         setLoading(false);
         if (data) {
@@ -52,8 +55,10 @@ function App() {
         }
       })
       .catch((err) => {
+        setLoading(false);
         setErrorText("Internal server error");
         setUserErr(true);
+        setUserName("");
       });
   };
   return (
@@ -69,7 +74,10 @@ function App() {
         />
       )}
       <header className="flex  pb-3 sm:pb-2 sm:pt-2 pt-3 relative justify-start items-start">
-        <h1 className=" text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl gitname text-center relative h-full px-2 ">
+        <div className="relative h-8 w-8 flex justify-center items-center ml-2">
+          <img src={git} alt="github" className="relative w-full h-full" />
+        </div>
+        <h1 className=" text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl gitname text-center relative h-full px-1 ">
           gitFindr
         </h1>
       </header>
@@ -81,7 +89,8 @@ function App() {
           <input
             type="text"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            // userName.replace(/ /g, "")
+            onChange={(e) => setUserName(e.target.value.replace(/ /g, ""))}
             placeholder="find a github user"
             className="theme px-1 rounded md:w-2/3 lg:w-1/4 h-10 md:h-12 w-3/4 xl:w-1/4 sm:w-3/4 border-green-500 border-2 outline-none "
           />
