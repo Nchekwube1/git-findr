@@ -30,10 +30,9 @@ function App() {
   };
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorText("");
     setLoading(true);
     setUserName(userName.replace(/ /g, ""));
-    // const formatted = userName.replace(/ /g, "");
-    // console.log(userName, formatted);
     axios
       .get(gitUrl)
       .then((res) => {
@@ -49,16 +48,16 @@ function App() {
             repos: data.public_repos,
           });
           setModalf(true);
-        } else {
-          setErrorText("user not found");
-          setUserErr(true);
         }
       })
       .catch((err) => {
-        setLoading(false);
-        setErrorText("Internal server error");
-        setUserErr(true);
-        setUserName("");
+        if (err) {
+          setLoading(false);
+          setErrorText("user not found");
+          setTimeout(() => setErrorText(""), 3000);
+          setUserErr(true);
+          setUserName("");
+        }
       });
   };
   return (

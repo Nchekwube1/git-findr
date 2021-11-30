@@ -38,11 +38,11 @@ const Modal: React.FC<res> = ({
             alt="close modal"
           />
         </div>
-        <div className="relative w-32 h-32 my-3 md:w-40 md:h-40 border-2 border-green-300 rounded-full bg-gray-50">
+        <div className="relative w-32 h-32 my-3 md:w-40 md:h-40 border-4 border-green-300 rounded-full bg-gray-50">
           <img
             src={img_url}
             alt="user"
-            className="object-contain relative w-full h-full"
+            className="object-contain relative w-full h-full rounded-full "
           />
         </div>
         <div className="relative rounded-md w-2/3 h-10 py-2  px-2 my-1 shadow-inner theme flex  items-center ">
